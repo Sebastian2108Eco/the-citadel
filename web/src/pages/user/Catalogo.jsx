@@ -11,7 +11,6 @@ const Catalogo = () => {
     const [busqueda, setBusqueda] = useState('');
 
     useEffect(() => {
-        // Solo un fetch es necesario
         fetch('http://localhost:5000/api/catalogo')
             .then(res => res.json())
             .then(data => {
@@ -23,7 +22,6 @@ const Catalogo = () => {
     }, []);
 
     const librosFiltrados = libros.filter(libro => {
-        // Usamos ?. (optional chaining) y || '' (valor por defecto)
         const titulo = (libro.titulo || '').toLowerCase();
         const autor = (libro.autor || '').toLowerCase();
         const busquedaLower = busqueda.toLowerCase();

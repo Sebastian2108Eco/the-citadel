@@ -20,14 +20,17 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// 2. Hacer pública la carpeta 'uploads' para que el frontend pueda ver las imágenes
 app.use('/uploads', express.static('uploads'));
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'SilverBack2026!',
-    database: 'citadel'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: false // ¡ESTO ES LO MÁS IMPORTANTE!
+  }
 });
 
 db.connect((err) => {
@@ -45,7 +48,6 @@ app.post('/api/login', (req, res) => {
         if (err) return res.status(500).json({ error: err.message });
         
         if (result.length > 0) {
-            // Éxito: enviamos el usuario y el success: true
             res.json({ success: true, user: result[0] });
         } else {
             // Fallo: credenciales incorrectas
