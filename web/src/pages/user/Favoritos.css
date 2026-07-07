@@ -1,0 +1,54 @@
+/* Header */
+.favoritos-header { margin-bottom: 40px; }
+.favoritos-header h1 { color: #1a2a40; font-size: 2rem; }
+.subtitle { color: #666; }
+
+/* Grid de Tarjetas */
+.grid-libros { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 30px; 
+}
+
+.tarjeta-libro { 
+    background: white; 
+    padding: 20px; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+.tarjeta-libro:hover { transform: translateY(-5px); }
+
+.libro-img { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+
+/* Botones */
+.acciones { display: flex; gap: 10px; margin-top: 15px; }
+.btn-detalle { 
+    flex: 1; background: #1a2a40; color: white; border: none; 
+    padding: 10px; border-radius: 6px; cursor: pointer; 
+}
+.btn-eliminar { 
+    background: #ffebee; color: #d32f2f; border: none; 
+    padding: 10px 15px; border-radius: 6px; cursor: pointer; transition: 0.2s;
+}
+.btn-eliminar:hover { background: #ffcdd2; }
+.logout-section {
+    margin-top: auto; /* Empuja el botón hacia abajo si el sidebar tiene display flex */
+    padding-top: 20px;
+    border-top: 1px solid #2d3e5a;
+}
+
+.logout-btn {
+    background: transparent;
+    border: none;
+    color: #ff4d4d !important; /* Un rojo elegante para indicar salida */
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-btn:hover {
+    color: #ff7f7f !important;
+}

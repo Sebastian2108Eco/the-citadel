@@ -1,0 +1,154 @@
+/* Layout Global */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f5ef;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: #1a2a40;
+    padding: 30px 20px;
+    color: white;
+}
+
+.sidebar h2 {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #c5a045;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item {
+    margin-bottom: 25px;
+}
+
+.nav-link {
+    color: #a0aab8;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+/* Contenido Principal */
+.main-content {
+    flex: 1;
+    padding: 40px;
+}
+
+/* Buscador */
+.search-bar {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+/* Categorías */
+.category-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.category-btn {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid #c5a045;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.category-btn.active {
+    background: #c5a045;
+    color: white;
+}
+
+/* Grid de Libros */
+.books-grid {
+    display: grid;
+    /* Esto asegura que las tarjetas tengan un ancho mínimo y se ajusten solas */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.book-card {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.author-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Botones */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.view-btn {
+    background: #1a2a40;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.fav-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.book-img {
+    width: 100%;
+    /* Ocupa todo el ancho de la tarjeta */
+    height: 250px;
+    /* Altura fija para que todas las tarjetas sean iguales */
+    object-fit: cover;
+    /* Esto recorta la imagen proporcionalmente para que llene el espacio */
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    /* Un color gris suave si la imagen no carga */
+    margin-bottom: 10px;
+    display: block;
+}
+.logout-section {
+    margin-top: auto; /* Empuja el botón hacia abajo si el sidebar tiene display flex */
+    padding-top: 20px;
+    border-top: 1px solid #2d3e5a;
+}
+
+.logout-btn {
+    background: transparent;
+    border: none;
+    color: #ff4d4d !important; /* Un rojo elegante para indicar salida */
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-btn:hover {
+    color: #ff7f7f !important;
+}

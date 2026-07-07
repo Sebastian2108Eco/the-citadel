@@ -1,0 +1,92 @@
+/* Contenedor del formulario */
+.form-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+    gap: 20px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f0f0f0;
+    margin-bottom: 30px;
+}
+.form-actions {
+    grid-column: span 3; /* Hace que el grupo de botones ocupe el ancho completo */
+    display: flex;
+    gap: 15px; /* Espacio entre Guardar y Cancelar */
+    align-items: center;
+}
+/* Inputs y Selects */
+.form-container input, 
+.form-container select {
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    width: 100%;
+    font-size: 0.9rem;
+    background: #fcfcfc;
+}
+
+/* El área de texto y el botón ocupan las 3 columnas para verse más grandes */
+.full-width {
+    grid-column: span 3;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    height: 100px;
+    resize: none;
+    background: #fcfcfc;
+}
+
+/* Grupo de archivos */
+.file-input-group {
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: 600;
+    color: #1a2a40;
+}
+
+/* Botón Guardar */
+.btn-guardar {
+    grid-column: span 2;
+    background: #1b263b; /* Azul Citadel */
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-guardar:hover {
+    background: #2a3d5e;
+}
+
+/* Botón Cancelar */
+/* Ajuste para que no sea un bloque gigante */
+.btn-cancelar {
+    display: inline-block;
+    width: auto;         /* Ajusta el ancho al contenido */
+    padding: 10px 20px;  /* Más pequeño y controlado */
+    margin-top: 10px;
+    background: transparent;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.btn-cancelar:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-cancelar:hover {
+    background: #fff1f0;
+}

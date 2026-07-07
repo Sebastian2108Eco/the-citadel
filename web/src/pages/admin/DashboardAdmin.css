@@ -1,0 +1,117 @@
+/* Layout General */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background: #fcfaf5;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 240px;
+    background: #1b263b;
+    color: white;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    display: block;
+    color: #a0aec0;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.nav-item.active {
+    background: #d4af37;
+    color: white;
+}
+
+/* Main Content */
+.admin-main {
+    flex: 1;
+    padding: 40px;
+}
+
+.admin-header {
+    margin-bottom: 30px;
+}
+
+/* --- Tarjetas de Estadísticas (Stats Grid) --- */
+.stats-grid { 
+    display: flex;         /* Cambiamos de grid a flex */
+    flex-wrap: wrap;       /* Permite que se acomoden si la pantalla es pequeña */
+    gap: 25px; 
+    margin-bottom: 40px; 
+    justify-content: flex-start; /* Esto hará que se peguen a la izquierda */
+}
+
+.stat-card { 
+    background: #ffffff; 
+    padding: 30px 40px;    /* Un poco más de aire horizontal */
+    border-radius: 20px; 
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    min-width: 250px;      /* Tamaño mínimo para que no se vean muy chiquitas */
+    flex: 0 1 auto;        /* Esto es clave: no se estiran, se ajustan al contenido */
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card h3 {
+    font-size: 0.75rem;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+.stat-card p {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1a2a40;
+    margin: 10px 0 0;
+}
+
+/* --- Actividad Reciente --- */
+.activity-card {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+}
+
+.activity-card h3 {
+    font-size: 0.9rem;
+    color: #1a2a40;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f9f9f9;
+}
+
+.activity-item {
+    padding: 18px 0;
+    border-bottom: 1px solid #f7f7f7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-item span {
+    color: #4a5568;
+}
+
+.activity-item small {
+    color: #b7b7b7;
+    font-size: 0.8rem;
+}

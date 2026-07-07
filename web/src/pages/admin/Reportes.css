@@ -1,0 +1,159 @@
+/* ==========================================================================
+   THE CITADEL - ESTILOS GLOBALES
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #fcfbf7; /* Fondo crema suave */
+}
+
+/* ==========================================================================
+   ESTRUCTURA PRINCIPAL (LAYOUT)
+   ========================================================================== */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 260px;
+    background-color: #1b263b; /* Azul marino profundo */
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-sidebar h2 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.nav-item {
+    color: #94a3b8;
+    text-decoration: none;
+    display: block;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: 0.3s;
+}
+
+.nav-item.active {
+    background-color: #e0aa3e; /* Dorado Citadel */
+    color: #1b263b;
+    font-weight: bold;
+}
+
+.gestion-container {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/* ==========================================================================
+   COMPONENTES DE REPORTE Y ESTADÍSTICAS
+   ========================================================================== */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+/* Tarjetas de estadísticas superiores */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.stat-card h4 { color: #64748b; font-size: 0.9rem; margin-bottom: 5px; }
+.stat-card p { font-size: 1.5rem; font-weight: bold; }
+
+/* Fila de gráficas */
+.charts-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.chart-box {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-box canvas {
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+
+/* ==========================================================================
+   TABLAS Y FORMULARIOS
+   ========================================================================== */
+.table-wrapper, 
+.popular-books-list, 
+.form-container {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f0f0f0;
+    margin-bottom: 30px;
+}
+
+.tabla-libros { width: 100%; border-collapse: collapse; }
+.tabla-libros th { color: #64748b; font-size: 0.85rem; text-transform: uppercase; padding: 15px; border-bottom: 2px solid #f1f5f9; }
+.tabla-libros td { padding: 18px 15px; border-bottom: 1px solid #f1f5f9; }
+
+/* ==========================================================================
+   BOTONES Y ELEMENTOS DE ACCIÓN
+   ========================================================================== */
+.btn-guardar, 
+.btn-exportar {
+    background: #1b263b;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-guardar:hover, .btn-exportar:hover {
+    background: #2a3d5e;
+    transform: translateY(-2px);
+}
+
+.logout-btn {
+    margin-top: auto;
+    background: transparent;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}

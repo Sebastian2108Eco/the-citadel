@@ -1,0 +1,108 @@
+/* Contenedor principal */
+.login-container {
+    display: flex;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Lado izquierdo - Elegante */
+.login-left {
+    flex: 1;
+    background: linear-gradient(135deg, #1b263b 0%, #0d1b2a 100%);
+    color: #e0e1dd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    text-align: center;
+}
+
+.login-left h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
+    color: #c5a045; /* Oro */
+    margin-bottom: 10px;
+}
+
+.frase {
+    font-style: italic;
+    opacity: 0.8;
+    margin-top: 30px;
+    max-width: 300px;
+}
+
+/* Lado derecho - Moderno */
+.login-right {
+    flex: 1;
+    background-color: #f8f5ef; /* Crema suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombra elegante */
+    width: 350px;
+}
+
+.login-form h2 {
+    color: #1b263b;
+    margin-bottom: 5px;
+}
+
+/* Estilo Inputs */
+.login-form label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #666;
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+    transition: border 0.3s ease;
+}
+
+.login-form input:focus {
+    border-color: #c5a045;
+    outline: none;
+}
+
+/* Botón Premium */
+.login-button {
+    width: 100%;
+    background-color: #c5a045;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.login-button:hover {
+    background-color: #a8873a;
+    transform: translateY(-2px); /* Pequeño efecto de elevación */
+}
+
+.olvide-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #888;
+    text-decoration: none;
+}

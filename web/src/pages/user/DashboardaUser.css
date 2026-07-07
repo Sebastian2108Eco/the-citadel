@@ -1,0 +1,116 @@
+/* Layout Principal */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f5ef; /* El color crema de tu diseño */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Sidebar Estilizado */
+.sidebar {
+    width: 260px;
+    background-color: #1a2a40;
+    padding: 30px 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 { font-size: 1.2rem; margin-bottom: 40px; color: #c5a045; letter-spacing: 1px; }
+
+.nav-list { list-style: none; padding: 0; }
+.nav-item { margin-bottom: 25px; }
+.nav-link { 
+    color: #a0aab8; 
+    text-decoration: none; 
+    font-size: 1rem;
+    transition: 0.3s;
+}
+.nav-link:hover { color: white; }
+
+/* Contenido Principal */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/* Tarjeta de bienvenida tipo "Dark Mode" */
+.welcome-card {
+    background-color: #1a2a40;
+    color: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.welcome-card h1 { margin: 0 0 10px 0; font-size: 1.8rem; }
+.welcome-card p { opacity: 0.8; margin-bottom: 20px; }
+
+.explore-btn {
+    background-color: #c5a045;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.explore-btn:hover { background-color: #a8873a; transform: translateY(-2px); }
+
+/* Grid de Libros Premium */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.book-card {
+    background: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+.book-card:hover { transform: scale(1.03); }
+
+.book-img { 
+    width: 100%; 
+    height: 250px; 
+    object-fit: cover; 
+    border-radius: 10px; 
+}
+
+.book-card h4 { margin: 15px 0 5px 0; color: #333; }
+
+.status-tag { 
+    font-size: 0.75rem; 
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+.available { background: #e8f5e9; color: #2e7d32; }
+.borrowed { background: #ffebee; color: #c62828; }
+.logout-section {
+    margin-top: auto; /* Empuja el botón hacia abajo si el sidebar tiene display flex */
+    padding-top: 20px;
+    border-top: 1px solid #2d3e5a;
+}
+
+.logout-btn {
+    background: transparent;
+    border: none;
+    color: #ff4d4d !important; /* Un rojo elegante para indicar salida */
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-btn:hover {
+    color: #ff7f7f !important;
+}

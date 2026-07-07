@@ -1,0 +1,127 @@
+/* Contenedor general para el layout de "The Citadel" */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #fcfaf5; /* El color crema de fondo */
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px 60px;
+}
+
+/* Header del perfil */
+.perfil-header { margin-bottom: 30px; }
+.perfil-header h1 { color: #1a2a40; font-size: 1.8rem; margin: 0; }
+.perfil-header p { color: #888; margin: 5px 0 0; }
+
+/* Tarjeta superior: Usuario */
+.perfil-card-user { 
+    background: white; 
+    padding: 25px; 
+    border-radius: 15px; 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+    margin-bottom: 30px;
+}
+
+.avatar-placeholder { 
+    background: #d4af37; 
+    color: white; 
+    width: 70px; 
+    height: 70px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 1.5rem; 
+    font-weight: bold;
+}
+
+.user-info h3 { margin: 0; color: #1a2a40; }
+.user-info p { margin: 5px 0; color: #666; font-size: 0.9rem; }
+.badge { 
+    display: inline-block;
+    background: #eef2f7; 
+    color: #1a2a40; 
+    padding: 4px 12px; 
+    border-radius: 20px; 
+    font-size: 0.75rem; 
+    margin-top: 5px;
+}
+
+/* Tarjeta del formulario */
+.perfil-card-form { 
+    background: white; 
+    padding: 40px; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+}
+
+.perfil-card-form h3 { 
+    color: #1a2a40; 
+    margin-bottom: 30px; 
+    font-size: 0.9rem; 
+    letter-spacing: 1px;
+}
+
+/* Formulario */
+.form-group { margin-bottom: 25px; }
+.form-group label { 
+    display: block; 
+    font-size: 0.7rem; 
+    font-weight: bold; 
+    color: #999; 
+    margin-bottom: 10px; 
+    letter-spacing: 0.5px;
+}
+
+.form-group input { 
+    width: 100%; 
+    padding: 12px 0; 
+    border: none; 
+    border-bottom: 1px solid #ddd; 
+    font-size: 1rem; 
+    outline: none;
+    color: #333;
+}
+
+.form-group input:focus { border-bottom-color: #d4af37; }
+
+/* Botón de actualizar */
+.btn-update { 
+    background: #d4af37; 
+    color: white; 
+    padding: 12px 30px; 
+    border: none; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: background 0.3s;
+}
+
+.btn-update:hover { background: #b8962c; }
+
+/* Para mantener el botón al final del sidebar */
+.logout-section {
+    margin-top: auto; /* Empuja el botón hacia abajo si el sidebar tiene display flex */
+    padding-top: 20px;
+    border-top: 1px solid #2d3e5a;
+}
+
+.logout-btn {
+    background: transparent;
+    border: none;
+    color: #ff4d4d !important; /* Un rojo elegante para indicar salida */
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-btn:hover {
+    color: #ff7f7f !important;
+}
