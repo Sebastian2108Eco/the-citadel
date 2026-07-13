@@ -11,7 +11,7 @@ const Catalogo = () => {
     const [busqueda, setBusqueda] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/catalogo')
+        fetch('${import.meta.env.VITE_API_URL}/api/catalogo')
             .then(res => res.json())
             .then(data => {
                 setLibros(data);
@@ -82,7 +82,7 @@ const Catalogo = () => {
                     {librosFiltrados.map(libro => (
                         <div key={libro.id_libro} className="book-card">
                             <img
-                                src={`http://localhost:5000${libro.portada}`}
+                                src={`${import.meta.env.VITE_API_URL}${libro.portada}`}
                                 alt={libro.titulo}
                                 className="book-img"
                                 onError={(e) => {

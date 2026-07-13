@@ -10,7 +10,7 @@ function GestionLibros() {
     const navigate = useNavigate();
 
     const cargarLibros = () => {
-        fetch('http://localhost:5000/api/libros')
+        fetch('${import.meta.env.VITE_API_URL}/api/libros')
             .then(res => res.json())
             .then(data => setLibros(data))
             .catch(err => console.error("Error al cargar libros:", err));
@@ -18,7 +18,7 @@ function GestionLibros() {
 
     const eliminarLibro = (id) => {
         if (window.confirm("¿Seguro que quieres eliminar este libro?")) {
-            fetch(`http://localhost:5000/api/libros/${id}`, { method: 'DELETE' })
+            fetch(`${import.meta.env.VITE_API_URL}/api/libros/${id}`, { method: 'DELETE' })
                 .then(() => cargarLibros());
         }
     };

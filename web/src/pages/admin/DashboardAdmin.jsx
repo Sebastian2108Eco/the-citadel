@@ -15,12 +15,12 @@ const DashboardAdmin = () => {
         window.location.href = '/';   // Redirige al login
     };
     useEffect(() => {
-        fetch('http://localhost:5000/api/estadisticas')
+        fetch('${import.meta.env.VITE_API_URL}/api/estadisticas')
             .then(res => res.json())
             .then(data => setStats(data))
             .catch(err => console.error("Error stats:", err));
 
-        fetch('http://localhost:5000/api/actividad-reciente')
+        fetch('${import.meta.env.VITE_API_URL}/api/actividad-reciente')
             .then(res => res.json())
             .then(data => setActividad(data))
             .catch(err => console.error("Error actividad:", err));

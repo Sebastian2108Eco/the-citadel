@@ -11,12 +11,12 @@ const DashboardUser = () => {
         const userId = localStorage.getItem('userId'); // Asegúrate de guardar esto al loguear
 
         // Cargar datos del usuario
-        fetch(`http://localhost:5000/api/user/dashboard/${userId}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/user/dashboard/${userId}`)
             .then(res => res.json())
             .then(setInfo);
 
         // Cargar libros recientes
-        fetch('http://localhost:5000/api/libros/recientes')
+        fetch('${import.meta.env.VITE_API_URL}/api/libros/recientes')
             .then(res => res.json())
             .then(setLibros);
     }, []);
@@ -55,7 +55,7 @@ const DashboardUser = () => {
                 {libros.map(libro => (
                     <div key={libro.id_libro} className="book-card">
 <img
-                                src={`http://localhost:5000${libro.portada}`}
+                                src={`${import.meta.env.VITE_API_URL}${libro.portada}`}
                                 alt={libro.titulo}
                                 className="book-img"
                                 onError={(e) => {

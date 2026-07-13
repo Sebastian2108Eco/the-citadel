@@ -18,7 +18,7 @@ const DetalleLibro = () => {
             return;
         }
 
-        fetch('http://localhost:5000/api/prestamo/solicitar', {
+        fetch('${import.meta.env.VITE_API_URL}/api/prestamo/solicitar', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -37,7 +37,7 @@ const DetalleLibro = () => {
     };
     // Dentro de tu useEffect, agrega un console.log para ver qué llega:
     useEffect(() => {
-        fetch(`http://localhost:5000/api/libro/${id}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/libro/${id}`)
             .then(res => res.json())
             .then(data => {
                 console.log("Datos del libro recibidos:", data); // <--- MIRA ESTO EN LA CONSOLA (F12)
@@ -51,7 +51,7 @@ const DetalleLibro = () => {
     }, []);
 
     const manejarFavorito = async () => {
-        const res = await fetch('http://localhost:5000/api/favoritos', {
+        const res = await fetch('${import.meta.env.VITE_API_URL}/api/favoritos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id_usuario: 1, id_libro: libro.id_libro })
@@ -91,7 +91,7 @@ const DetalleLibro = () => {
                 <div className="detalle-layout">
                     {/* Columna Izquierda: Imagen */}
                     <div className="detalle-imagen">
-                        <img src={`http://localhost:5000${libro.portada}`} alt="Portada" />
+                        <img src={`${import.meta.env.VITE_API_URL}${libro.portada}`} alt="Portada" />
                     </div>
 
                     {/* Columna Derecha: Información */}

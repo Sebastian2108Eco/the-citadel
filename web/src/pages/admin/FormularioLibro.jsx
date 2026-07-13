@@ -21,12 +21,12 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
     // Cargar autores
     useEffect(() => {
         // Cargar autores
-        fetch('http://localhost:5000/api/autores')
+        fetch('${import.meta.env.VITE_API_URL}/api/autores')
             .then(res => res.json())
             .then(data => setAutores(data));
 
         // Cargar categorías
-        fetch('http://localhost:5000/api/categorias') // Asegúrate que este endpoint exista en tu server.js
+        fetch('${import.meta.env.VITE_API_URL}/api/categorias') // Asegúrate que este endpoint exista en tu server.js
             .then(res => res.json())
             .then(data => setCategorias(data));
     }, []);
@@ -81,8 +81,8 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
 
         const metodo = libroAEditar ? 'PUT' : 'POST';
         const url = libroAEditar
-            ? `http://localhost:5000/api/libros/${libroAEditar.id_libro}`
-            : 'http://localhost:5000/api/libros';
+            ? `${import.meta.env.VITE_API_URL}/api/libros/${libroAEditar.id_libro}`
+            : '${import.meta.env.VITE_API_URL}/api/libros';
 
         try {
             const response = await fetch(url, {

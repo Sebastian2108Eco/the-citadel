@@ -8,7 +8,7 @@ function Favoritos() {
     const idUsuario = 1; // Aquí deberás poner el ID de tu usuario logueado
 
     const cargarFavoritos = () => {
-        fetch(`http://localhost:5000/api/favoritos/${idUsuario}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/favoritos/${idUsuario}`)
             .then(res => res.json())
             .then(data => setLibros(data))
             .catch(err => console.error("Error al cargar favoritos:", err));
@@ -20,7 +20,7 @@ function Favoritos() {
 
     const eliminarFavorito = async (idLibro) => {
         // Reutilizamos tu lógica de POST para alternar (al enviar el mismo ID, lo elimina)
-        await fetch('http://localhost:5000/api/favoritos', {
+        await fetch('${import.meta.env.VITE_API_URL}/api/favoritos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id_usuario: idUsuario, id_libro: idLibro })
@@ -60,7 +60,7 @@ function Favoritos() {
                 <div className="grid-libros">
                     {libros.map(libro => (
                         <div key={libro.id_libro} className="tarjeta-libro">
-                            <img src={`http://localhost:5000${libro.portada}`} alt={libro.titulo} className="libro-img" />
+                            <img src={`${import.meta.env.VITE_API_URL}${libro.portada}`} alt={libro.titulo} className="libro-img" />
                             <h3>{libro.titulo}</h3>
                             <p className="autor-text">{libro.autor}</p>
 

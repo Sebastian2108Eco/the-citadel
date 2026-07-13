@@ -56,7 +56,7 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-// Asegúrate de tener esto en tu server.js
+
 app.post('/api/libros', upload.fields([{ name: 'portada' }, { name: 'archivo_pdf' }]), (req, res) => {
     const { titulo, isbn, descripcion, anio_publicacion, id_categoria, id_autor } = req.body;
     const portada = req.files['portada'] ? `/uploads/${req.files['portada'][0].filename}` : null;
@@ -386,7 +386,6 @@ app.get('/api/usuario/:id', (req, res) => {
 // Actualizar perfil
 app.put('/api/usuario/:id', (req, res) => {
     const { nombre, correo, password } = req.body;
-    // Si la contraseña viene vacía, solo actualizamos nombre y correo
     let sql = "UPDATE tb_usuarios SET nombre = ?, correo = ? WHERE id_usuario = ?";
     let params = [nombre, correo, req.params.id];
 
