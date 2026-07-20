@@ -1,5 +1,5 @@
 // src/services/api.js
-const API_URL = 'http://localhost:3000'; // Asegúrate de que este sea el puerto de tu backend
+const API_URL = 'https://the-citadel-api.onrender.com';
 
 export const obtenerLibros = async () => {
     try {
