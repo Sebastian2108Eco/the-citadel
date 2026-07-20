@@ -2,11 +2,9 @@ import { useState, useEffect } from 'react';
 import './FormularioLibro.css';
 import { Link, useNavigate } from 'react-router-dom';
 
-
 export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => {
     const [autores, setAutores] = useState([]);
     const [categorias, setCategorias] = useState([]);
-    // Asegúrate de que esto sea así, sin que falte ningún campo:
     const [nuevoLibro, setNuevoLibro] = useState({
         titulo: '',
         isbn: '',
@@ -15,26 +13,26 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
         portada: '',
         archivo_pdf: '',
         disponibilidad: 1,
-        id_categoria: '', // Si estos están vacíos, ponle '' no undefined
+        id_categoria: '',
         id_autor: ''
     });
-    // Cargar autores
+
     useEffect(() => {
         // Cargar autores
-        fetch('${import.meta.env.VITE_API_URL}/api/autores')
+        fetch(`${import.meta.env.VITE_API_URL}/api/autores`)
             .then(res => res.json())
-            .then(data => setAutores(data));
+            .then(data => setAutores(data))
+            .catch(err => console.error("Error al cargar autores:", err));
 
         // Cargar categorías
-        fetch('${import.meta.env.VITE_API_URL}/api/categorias') // Asegúrate que este endpoint exista en tu server.js
+        fetch(`${import.meta.env.VITE_API_URL}/api/categorias`)
             .then(res => res.json())
-            .then(data => setCategorias(data));
+            .then(data => setCategorias(data))
+            .catch(err => console.error("Error al cargar categorías:", err));
     }, []);
 
-    // Si viene libroAEditar, rellenamos el formulario
     useEffect(() => {
         if (libroAEditar) {
-            // Si hay un libro, llenamos el formulario con sus datos
             setNuevoLibro({
                 titulo: libroAEditar.titulo || '',
                 isbn: libroAEditar.isbn || '',
@@ -47,22 +45,18 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
                 id_autor: libroAEditar.id_autor || ''
             });
         } else {
-            // Si no, limpiamos el formulario
             setNuevoLibro({
                 titulo: '', isbn: '', descripcion: '', anio_publicacion: '',
                 portada: '', archivo_pdf: '', disponibilidad: 1,
                 id_categoria: '', id_autor: ''
             });
         }
-    }, [libroAEditar]); // Este efecto corre cada vez que el libro a editar cambia
+    }, [libroAEditar]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Creamos un FormData para poder enviar archivos (imágenes y PDFs)
         const formData = new FormData();
-
-        // Agregamos todos los campos de texto
         formData.append('titulo', nuevoLibro.titulo);
         formData.append('isbn', nuevoLibro.isbn);
         formData.append('descripcion', nuevoLibro.descripcion);
@@ -71,10 +65,8 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
         formData.append('id_categoria', nuevoLibro.id_categoria);
         formData.append('id_autor', nuevoLibro.id_autor);
 
-        // Agregamos los archivos (buscamos los inputs por su nombre)
-        // Asegúrate de que tus inputs en el form tengan name="portada" y name="archivo_pdf"
         const portadaFile = e.target.portada.files[0];
-        const pdfFile = e.target.archivo_pdf.files[0];
+        const pdfFile = e.target.archivo_pdf ? e.target.archivo_pdf.files[0] : null;
 
         if (portadaFile) formData.append('portada', portadaFile);
         if (pdfFile) formData.append('archivo_pdf', pdfFile);
@@ -82,13 +74,11 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
         const metodo = libroAEditar ? 'PUT' : 'POST';
         const url = libroAEditar
             ? `${import.meta.env.VITE_API_URL}/api/libros/${libroAEditar.id_libro}`
-            : '${import.meta.env.VITE_API_URL}/api/libros';
+            : `${import.meta.env.VITE_API_URL}/api/libros`;
 
         try {
             const response = await fetch(url, {
                 method: metodo,
-                // ¡IMPORTANTE!: No ponemos 'Content-Type': 'application/json' 
-                // El navegador detecta automáticamente el FormData y pone los headers correctos
                 body: formData
             });
 
@@ -110,6 +100,7 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
             alert("Hubo un error al guardar. Revisa la consola del servidor.");
         }
     };
+
     return (
         <form onSubmit={handleSubmit} className="form-container">
             <input
@@ -160,7 +151,6 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
                 onChange={e => setNuevoLibro({ ...nuevoLibro, descripcion: e.target.value })}
             />
 
-            {/* Contenedor de botones para que se alineen bien */}
             <div className="form-actions">
                 <button type="submit" className="btn-guardar">
                     {libroAEditar ? 'Actualizar Libro' : 'Guardar Libro'}
@@ -175,4 +165,5 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
         </form>
     );
 };
+
 export default FormularioLibro;
