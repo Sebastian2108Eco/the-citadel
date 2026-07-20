@@ -14,17 +14,20 @@ const DashboardAdmin = () => {
         localStorage.removeItem('token'); // Borra el token si lo usas
         window.location.href = '/';   // Redirige al login
     };
+    
     useEffect(() => {
-        fetch('${import.meta.env.VITE_API_URL}/api/estadisticas')
-            .then(res => res.json())
-            .then(data => setStats(data))
-            .catch(err => console.error("Error stats:", err));
+    // Fíjate en las comillas invertidas ``
+    fetch(`${import.meta.env.VITE_API_URL}/api/estadisticas`)
+        .then(res => res.json())
+        .then(data => setStats(data))
+        .catch(err => console.error("Error stats:", err));
 
-        fetch('${import.meta.env.VITE_API_URL}/api/actividad-reciente')
-            .then(res => res.json())
-            .then(data => setActividad(data))
-            .catch(err => console.error("Error actividad:", err));
-    }, []);
+    fetch(`${import.meta.env.VITE_API_URL}/api/actividad-reciente`)
+        .then(res => res.json())
+        .then(data => setActividad(data))
+        .catch(err => console.error("Error actividad:", err));
+}, []);
+
     return (
         <div className="admin-container">
             <nav className="admin-sidebar">
