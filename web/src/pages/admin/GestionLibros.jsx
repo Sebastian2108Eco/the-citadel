@@ -10,7 +10,7 @@ function GestionLibros() {
     const navigate = useNavigate();
 
     const cargarLibros = () => {
-        fetch('${import.meta.env.VITE_API_URL}/api/libros')
+        fetch(`${import.meta.env.VITE_API_URL}/api/libros`)
             .then(res => res.json())
             .then(data => setLibros(data))
             .catch(err => console.error("Error al cargar libros:", err));
