@@ -15,9 +15,9 @@ const Reportes = () => {
     const [librosPopulares, setLibrosPopulares] = useState([]);
 
     useEffect(() => {
-        fetch('${import.meta.env.VITE_API_URL}/api/reportes/prestamos-mes').then(res => res.json()).then(setStatsPrestamos);
-        fetch('${import.meta.env.VITE_API_URL}/api/reportes/libros-por-categoria').then(res => res.json()).then(setStatsCategorias);
-        fetch('${import.meta.env.VITE_API_URL}/api/reportes/libros-mas-consultados').then(res => res.json()).then(setLibrosPopulares);
+        fetch(`${import.meta.env.VITE_API_URL}/api/reportes/prestamos-mes`).then(res => res.json()).then(setStatsPrestamos);
+        fetch(`${import.meta.env.VITE_API_URL}/api/reportes/libros-por-categoria`).then(res => res.json()).then(setStatsCategorias);
+        fetch(`${import.meta.env.VITE_API_URL}/api/reportes/libros-mas-consultados`).then(res => res.json()).then(setLibrosPopulares);
     }, []);
 
     // Función para exportar a PDF
