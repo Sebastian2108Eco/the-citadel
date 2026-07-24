@@ -261,11 +261,23 @@ app.get('/api/user/dashboard/:id', (req, res) => {
     });
 });
 
-// Obtener libros recientes para el carrusel/grid
-app.get('/api/libros/recientes', (req, res) => {
-    db.query("SELECT * FROM tb_libros ORDER BY id_libro DESC LIMIT 4", (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(result);
+app.get('/api/usuario/recientes/:id_usuario', (req, res) => {
+    const { id_usuario } = req.params;
+    
+    const sql = `
+        SELECT l.*, p.fecha_prestamo 
+        FROM tb_prestamos p
+        JOIN tb_libros l ON p.id_libro = l.id_libro
+        WHERE p.id_usuario = ?
+        ORDER BY p.fecha_prestamo DESC
+        LIMIT 4
+    `;
+
+    db.query(sql, [id_usuario], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(results);
     });
 });
 
