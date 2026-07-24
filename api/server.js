@@ -280,6 +280,12 @@ app.get('/api/usuario/recientes/:id_usuario', (req, res) => {
         res.json(results);
     });
 });
+app.get('/api/libros/recientes', (req, res) => {
+    db.query("SELECT * FROM tb_libros ORDER BY id_libro DESC LIMIT 4", (err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(result);
+    });
+});
 
 app.get('/api/libros', (req, res) => {
     // Consulta simple para traer todos los libros
