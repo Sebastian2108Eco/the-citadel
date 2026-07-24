@@ -51,14 +51,33 @@ const DetalleLibro = () => {
     }, []);
 
     const manejarFavorito = async () => {
-        const res = await fetch('${import.meta.env.VITE_API_URL}/api/favoritos', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id_usuario: 1, id_libro: libro.id_libro })
-        });
+        // Obtenemos el id del usuario del localStorage o usamos 1 por defecto
+        const idUsuarioActual = localStorage.getItem('id_usuario') || 1;
 
-        if (res.ok) {
-            setEsFavorito(!esFavorito); // Cambia el estado visual
+        try {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/favoritos`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id_usuario: Number(idUsuarioActual),
+                    id_libro: libro.id_libro
+                })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setEsFavorito(!esFavorito); // Cambia el estado visual (icono o color)
+                if (data.action === 'added') {
+                    console.log('Libro agregado a favoritos');
+                } else {
+                    console.log('Libro eliminado de favoritos');
+                }
+            } else {
+                console.error('Error al actualizar favoritos:', data.error);
+            }
+        } catch (error) {
+            console.error('Error de red:', error);
         }
     };
 
@@ -86,7 +105,7 @@ const DetalleLibro = () => {
                 </ul>
             </nav>
             <main className="main-content">
-                
+
 
                 <div className="detalle-layout">
                     {/* Columna Izquierda: Imagen */}
