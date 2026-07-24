@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './FormularioLibro.css';
-import { Link, useNavigate } from 'react-router-dom';
 
 export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => {
     const [autores, setAutores] = useState([]);
@@ -66,7 +65,7 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
         formData.append('id_autor', nuevoLibro.id_autor);
 
         const portadaFile = e.target.portada.files[0];
-        const pdfFile = e.target.archivo_pdf ? e.target.archivo_pdf.files[0] : null;
+        const pdfFile = e.target.archivo_pdf.files[0];
 
         if (portadaFile) formData.append('portada', portadaFile);
         if (pdfFile) formData.append('archivo_pdf', pdfFile);
@@ -102,67 +101,102 @@ export const FormularioLibro = ({ onGuardar, libroAEditar, limpiarEdicion }) => 
     };
 
     return (
-        <form onSubmit={handleSubmit} className="form-container">
-            <input
-                placeholder="Título"
-                value={nuevoLibro.titulo}
-                onChange={e => setNuevoLibro({ ...nuevoLibro, titulo: e.target.value })}
-            />
-            <input
-                placeholder="ISBN"
-                value={nuevoLibro.isbn}
-                onChange={e => setNuevoLibro({ ...nuevoLibro, isbn: e.target.value })}
-            />
-            <input
-                placeholder="Año"
-                value={nuevoLibro.anio_publicacion}
-                onChange={e => setNuevoLibro({ ...nuevoLibro, anio_publicacion: e.target.value })}
-            />
+        <div className="form-wrapper">
+            <h2 className="form-title">{libroAEditar ? 'Editar Libro' : 'Nuevo Libro'}</h2>
+            <form onSubmit={handleSubmit} className="form-container">
+                <div className="form-grid">
+                    <div className="input-group">
+                        <label>Título</label>
+                        <input
+                            type="text"
+                            placeholder="Ej. El Hobbit"
+                            value={nuevoLibro.titulo}
+                            onChange={e => setNuevoLibro({ ...nuevoLibro, titulo: e.target.value })}
+                            required
+                        />
+                    </div>
 
-            <select
-                value={nuevoLibro.id_autor}
-                onChange={e => setNuevoLibro({ ...nuevoLibro, id_autor: e.target.value })}
-            >
-                <option value="">Selecciona un autor</option>
-                {autores.map(a => (
-                    <option key={a.id_autor} value={a.id_autor}>{a.nombre}</option>
-                ))}
-            </select>
+                    <div className="input-group">
+                        <label>ISBN</label>
+                        <input
+                            type="text"
+                            placeholder="Ej. 978-84-450..."
+                            value={nuevoLibro.isbn}
+                            onChange={e => setNuevoLibro({ ...nuevoLibro, isbn: e.target.value })}
+                        />
+                    </div>
 
-            <select
-                value={nuevoLibro.id_categoria}
-                onChange={e => setNuevoLibro({ ...nuevoLibro, id_categoria: e.target.value })}
-            >
-                <option value="">Selecciona una categoría</option>
-                {categorias.map(c => (
-                    <option key={c.id_categoria} value={c.id_categoria}>{c.nombre_categoria}</option>
-                ))}
-            </select>
+                    <div className="input-group">
+                        <label>Año de Publicación</label>
+                        <input
+                            type="number"
+                            placeholder="Ej. 1954"
+                            value={nuevoLibro.anio_publicacion}
+                            onChange={e => setNuevoLibro({ ...nuevoLibro, anio_publicacion: e.target.value })}
+                        />
+                    </div>
 
-            <div className="file-input-group">
-                <label>Portada:</label>
-                <input type="file" name="portada" accept="image/*" />
-            </div>
+                    <div className="input-group">
+                        <label>Autor</label>
+                        <select
+                            value={nuevoLibro.id_autor}
+                            onChange={e => setNuevoLibro({ ...nuevoLibro, id_autor: e.target.value })}
+                            required
+                        >
+                            <option value="">Selecciona un autor</option>
+                            {autores.map(a => (
+                                <option key={a.id_autor} value={a.id_autor}>{a.nombre}</option>
+                            ))}
+                        </select>
+                    </div>
 
-            <textarea
-                className="full-width"
-                placeholder="Descripción"
-                value={nuevoLibro.descripcion}
-                onChange={e => setNuevoLibro({ ...nuevoLibro, descripcion: e.target.value })}
-            />
+                    <div className="input-group">
+                        <label>Categoría</label>
+                        <select
+                            value={nuevoLibro.id_categoria}
+                            onChange={e => setNuevoLibro({ ...nuevoLibro, id_categoria: e.target.value })}
+                            required
+                        >
+                            <option value="">Selecciona una categoría</option>
+                            {categorias.map(c => (
+                                <option key={c.id_categoria} value={c.id_categoria}>{c.nombre_categoria}</option>
+                            ))}
+                        </select>
+                    </div>
 
-            <div className="form-actions">
-                <button type="submit" className="btn-guardar">
-                    {libroAEditar ? 'Actualizar Libro' : 'Guardar Libro'}
-                </button>
+                    <div className="input-group">
+                        <label>Imagen de Portada</label>
+                        <input type="file" name="portada" accept="image/*" />
+                    </div>
 
-                {libroAEditar && (
-                    <button type="button" onClick={limpiarEdicion} className="btn-cancelar">
-                        Cancelar
+                    <div className="input-group">
+                        <label>Archivo PDF del Libro</label>
+                        <input type="file" name="archivo_pdf" accept="application/pdf" />
+                    </div>
+
+                    <div className="input-group full-width">
+                        <label>Descripción</label>
+                        <textarea
+                            placeholder="Sinopsis o detalles del libro..."
+                            value={nuevoLibro.descripcion}
+                            onChange={e => setNuevoLibro({ ...nuevoLibro, descripcion: e.target.value })}
+                        />
+                    </div>
+                </div>
+
+                <div className="form-actions">
+                    <button type="submit" className="btn-guardar">
+                        {libroAEditar ? 'Actualizar Libro' : 'Guardar Libro'}
                     </button>
-                )}
-            </div>
-        </form>
+
+                    {libroAEditar && (
+                        <button type="button" onClick={limpiarEdicion} className="btn-cancelar">
+                            Cancelar
+                        </button>
+                    )}
+                </div>
+            </form>
+        </div>
     );
 };
 
