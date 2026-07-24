@@ -11,7 +11,7 @@ const Catalogo = () => {
     const [busqueda, setBusqueda] = useState('');
 
     useEffect(() => {
-        fetch('${import.meta.env.VITE_API_URL}/api/catalogo')
+        fetch(`${import.meta.env.VITE_API_URL}/api/catalogo`) // <--- Cambiado a /api/catalogo
             .then(res => res.json())
             .then(data => {
                 setLibros(data);
