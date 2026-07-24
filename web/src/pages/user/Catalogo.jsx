@@ -82,11 +82,10 @@ const Catalogo = () => {
                     {librosFiltrados.map(libro => (
                         <div key={libro.id_libro} className="book-card">
                             <img
-                                src={`${import.meta.env.VITE_API_URL}${libro.portada}`}
+                                src={libro.portada ? `${import.meta.env.VITE_API_URL}${libro.portada}` : '/images/no-image.jpg'}
                                 alt={libro.titulo}
                                 className="book-img"
                                 onError={(e) => {
-                                    // En lugar de ocultar, ponemos una imagen de respaldo
                                     e.target.src = '/images/no-image.jpg';
                                 }}
                             />
