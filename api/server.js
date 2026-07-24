@@ -319,18 +319,22 @@ app.get('/api/libro/:id', (req, res) => {
 app.post('/api/prestamo/solicitar', (req, res) => {
     const { id_usuario, id_libro } = req.body;
 
-    // 1. Insertamos el préstamo
-    const sqlPrestamo = "INSERT INTO tb_prestamos (id_usuario, id_libro, fecha_prestamo, estado) VALUES (?, ?, NOW(), 'aprobado')";
+    // 1. Insertamos el préstamo en la tabla tb_prestamos
+    const sqlPrestamo = "INSERT INTO tb_prestamos (id_usuario, id_libro, fecha_prestamo) VALUES (?, ?, NOW())";
+    
+    db.query(sqlPrestamo, [id_usuario, id_libro], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
 
-    // 2. ACTUALIZAMOS EL LIBRO A 0
-    const sqlUpdateLibro = "UPDATE tb_libros SET disponibilidad = 0 WHERE id_libro = ?";
+        // 2. Actualizamos la disponibilidad del libro a 0 (Prestado/No disponible)
+        const sqlUpdateLibro = "UPDATE tb_libros SET disponibilidad = 0 WHERE id_libro = ?";
+        db.query(sqlUpdateLibro, [id_libro], (errUpdate) => {
+            if (errUpdate) {
+                return res.status(500).json({ error: errUpdate.message });
+            }
 
-    db.query(sqlPrestamo, [id_usuario, id_libro], (err) => {
-        if (err) return res.status(500).json({ message: "Error al solicitar" });
-
-        // Ejecutamos la segunda consulta después de la primera
-        db.query(sqlUpdateLibro, [id_libro], (err) => {
-            res.json({ message: "¡Solicitud enviada!" });
+            res.json({ message: '¡Préstamo solicitado con éxito!' });
         });
     });
 });
