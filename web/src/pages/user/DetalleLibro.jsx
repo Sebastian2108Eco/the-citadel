@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import './DetalleLibro.css';
 
 const DetalleLibro = () => {
-    const { id } = useParams(); // El nombre "id" debe coincidir con el de App.jsx
-    console.log("ID recibido:", id); // Si esto sale "undefined", ahí está el problema. // Obtiene el ID de la URL
+    const { id } = useParams(); 
+    console.log("ID recibido:", id); 
     const [libro, setLibro] = useState(null);
     const [esFavorito, setEsFavorito] = useState(false);
+
     const solicitarPrestamo = () => {
-        // Obtenemos el ID que ya guardaste en el login
         const idUsuario = localStorage.getItem('userId');
 
         if (!idUsuario) {
@@ -18,11 +18,11 @@ const DetalleLibro = () => {
             return;
         }
 
-        fetch('${import.meta.env.VITE_API_URL}/api/prestamo/solicitar', {
+        fetch(`${import.meta.env.VITE_API_URL}/api/prestamo/solicitar`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id_usuario: idUsuario, // Usamos la variable que acabamos de obtener
+                id_usuario: idUsuario,
                 id_libro: libro.id_libro
             })
         })
@@ -30,28 +30,25 @@ const DetalleLibro = () => {
             .then(data => {
                 if (data.message) {
                     alert(data.message);
-                    // Esto recarga la página para refrescar los datos desde el servidor
                     window.location.reload();
                 }
             })
     };
-    // Dentro de tu useEffect, agrega un console.log para ver qué llega:
+
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}/api/libro/${id}`)
             .then(res => res.json())
             .then(data => {
-                console.log("Datos del libro recibidos:", data); // <--- MIRA ESTO EN LA CONSOLA (F12)
+                console.log("Datos del libro recibidos:", data); 
                 setLibro(data);
             });
     }, [id]);
 
     useEffect(() => {
-        // Aquí harías un fetch a una ruta nueva: /api/favoritos/check/:id_usuario/:id_libro
-        // y si responde true, haces setEsFavorito(true)
+        // Aquí puedes agregar la verificación de favoritos si lo requieres
     }, []);
 
     const manejarFavorito = async () => {
-        // Obtenemos el id del usuario del localStorage o usamos 1 por defecto
         const idUsuarioActual = localStorage.getItem('id_usuario') || 1;
 
         try {
@@ -67,7 +64,7 @@ const DetalleLibro = () => {
             const data = await res.json();
 
             if (res.ok) {
-                setEsFavorito(!esFavorito); // Cambia el estado visual (icono o color)
+                setEsFavorito(!esFavorito); 
                 if (data.action === 'added') {
                     console.log('Libro agregado a favoritos');
                 } else {
@@ -78,6 +75,16 @@ const DetalleLibro = () => {
             }
         } catch (error) {
             console.error('Error de red:', error);
+        }
+    };
+
+    // Función para abrir el PDF correctamente
+    const manejarLeerLibro = () => {
+        if (libro && libro.archivo_pdf) {
+            const urlCompleta = `${import.meta.env.VITE_API_URL}${libro.archivo_pdf}`;
+            window.open(urlCompleta, '_blank');
+        } else {
+            alert('Este libro aún no tiene un archivo PDF disponible.');
         }
     };
 
@@ -95,7 +102,6 @@ const DetalleLibro = () => {
                     <button
                         className="nav-link logout-btn"
                         onClick={() => {
-                            // Aquí va tu lógica de logout, por ejemplo:
                             localStorage.removeItem('token');
                             window.location.href = '/';
                         }}
@@ -105,8 +111,6 @@ const DetalleLibro = () => {
                 </ul>
             </nav>
             <main className="main-content">
-
-
                 <div className="detalle-layout">
                     {/* Columna Izquierda: Imagen */}
                     <div className="detalle-imagen">
@@ -135,11 +139,19 @@ const DetalleLibro = () => {
                         </div>
 
                         <div className="acciones-box">
+                            {/* Botón de Préstamo condicionado */}
                             {libro.disponibilidad === 1 ? (
                                 <button className="btn-primary" onClick={solicitarPrestamo}>Solicitar Préstamo</button>
                             ) : (
-                                <button className="btn-read" onClick={() => { /* tu lógica de PDF */ }}>Leer Libro</button>
+                                <button className="btn-secondary" disabled>No disponible para préstamo</button>
                             )}
+
+                            {/* Botón de Leer Libro independiente que abre el PDF */}
+                            <button className="btn-read" onClick={manejarLeerLibro}>
+                                Leer Libro
+                            </button>
+
+                            {/* Botón de Favoritos */}
                             <button className={`btn-fav ${esFavorito ? 'active' : ''}`} onClick={manejarFavorito}>
                                 {esFavorito ? '❤️ Quitar de Favoritos' : '🤍 Favoritos'}
                             </button>
@@ -150,4 +162,5 @@ const DetalleLibro = () => {
         </div>
     );
 };
+
 export default DetalleLibro;
